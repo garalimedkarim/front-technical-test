@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { ItemService } from './services/item.service';
 
 @Component({
 	selector: 'oo-app',
@@ -9,8 +10,20 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit {
 	menuItems: MenuItem[];
 
+	constructor(
+		private itemService: ItemService
+	){
+
+	}
+
 	ngOnInit() {
 		this.updateItems();
+
+		this.itemService.getItems()
+		.subscribe(items=>{
+			console.log("items",items);
+		});
+
 	}
 
 	updateItems() {

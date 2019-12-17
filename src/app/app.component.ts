@@ -7,14 +7,14 @@ import { MenuItem } from 'primeng/api';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-	items: MenuItem[];
+	menuItems: MenuItem[];
 
 	ngOnInit() {
 		this.updateItems();
 	}
 
 	updateItems() {
-		this.items = [
+		this.menuItems = [
 			{ label: 'Open', icon: 'pi pi-fw pi-external-link' },
 			{
 				label: 'File',

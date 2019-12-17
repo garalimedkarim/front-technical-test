@@ -10,6 +10,10 @@ export class AppComponent implements OnInit {
 	items: MenuItem[];
 
 	ngOnInit() {
+		this.updateItems();
+	}
+
+	updateItems() {
 		this.items = [
 			{ label: 'Open', icon: 'pi pi-fw pi-external-link' },
 			{
@@ -87,8 +91,6 @@ export class AppComponent implements OnInit {
 			}
 		];
 	}
-
-
 
 
 }

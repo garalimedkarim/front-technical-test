@@ -39,5 +39,9 @@ export class ItemService {
 
   }
 
-
+  // downloadItem(url:string){
+  //   return this.http.get(this.apiEndPoint+"/api/items/"+url);
+  //   // return this.http.get(url);
+  // }
+  
 }

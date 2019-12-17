@@ -1,2 +1,55 @@
+<!-- <p-panelMenu [transitionOptions]="'0ms'" [model]="menuItems" [style]="{'width':'80vw'}"></p-panelMenu> -->
+<div class="container-fluid mt-3">
 
-<p-panelMenu [transitionOptions]="'0ms'" [model]="menuItems" [style]="{'width':'80vw'}"></p-panelMenu>
+      <div class="row">
+            <div class="col-12">
+                  <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="#">Home</a></li>
+                              <li class="breadcrumb-item"><a href="#">Library</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                  </nav>
+            </div>
+      </div>
+
+      <div class="row">
+            <div class="col-12">
+                  <table class="table">
+                        <thead class="thead-dark">
+                              <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Created</th>
+                                    <th scope="col">Last modification</th>
+                                    <th scope="col">Actions</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr *ngFor="let item of items">
+                                    <th>
+                                          <i class="fa {{item.getIcon()}}" aria-hidden="true"></i> {{ item.getName() }}
+                                    </th>
+                                    <td>{{ item.getCreation() | date:'short' }}</td>
+                                    <td>{{ item.getModification() | date:'short' }}</td>
+                                    <td *ngIf="item.isFolder()"></td>
+                                    <td class="text-center" *ngIf="!item.isFolder()">
+                                          <!-- <button type="button" class="btn btn-success" (click)="download(item.links.download.href)">
+                                                <i class="fa fa-download"></i>
+                                          </button> -->
+                                          <a class="btn btn-success" href={{item.links.download.href}}><i class="fa fa-download"></i></a>
+                                          <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </td>
+                              </tr>
+                        </tbody>
+                        <tfoot>
+                              <tr>
+                                    <td colspan="4" class="text-right">
+                                          <button class="btn btn-lg btn-primary">Upload file</button>
+                                    </td>
+                              </tr>
+                        </tfoot>
+                  </table>
+            </div>
+      </div>
+
+</div>

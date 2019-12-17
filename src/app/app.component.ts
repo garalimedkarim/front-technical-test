@@ -10,7 +10,7 @@ import { Item } from './models/item';
 })
 export class AppComponent implements OnInit {
 	menuItems: MenuItem[];
-
+	items: Item[];
 	constructor(
 		private itemService: ItemService
 	){
@@ -18,14 +18,21 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.updateItems();
+		// this.updateItems();
 
 		this.itemService.getItems()
 		.subscribe((items: Item[])=>{
 			console.log("items OK",items);
+			this.items = items;
 		});
 
 	}
+
+	// download(url:string){
+	// 	console.log("download===", url);
+	// 	this.itemService.downloadItem(url)
+	// 	.subscribe(res => console.log, error => console.log);
+	// }
 
 	updateItems() {
 		this.menuItems = [

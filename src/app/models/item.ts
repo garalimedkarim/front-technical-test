@@ -2,8 +2,8 @@ export class Item {
     private id: string;
     private name: string;
     private folder: boolean;
-    private creation: string;
-    private modification: string;
+    private creation: Date;
+    private modification: Date;
     private icon: string;
     public links:any;
     // private items: Item[];
@@ -20,9 +20,9 @@ export class Item {
         this.id = id;
         this.name = name;
         this.folder = folder;
-        this.creation = creation;
-        this.modification = modification;
-        this.icon = "";
+        this.creation = new Date(creation);
+        this.modification = new Date(modification);
+        this.icon = (folder? "fa-folder": "fa-file-o");
         this.links = links;
         // this.items = items;
     }
@@ -51,19 +51,19 @@ export class Item {
         this.folder = folder;
     }
 
-    public getCreation(): string {
+    public getCreation(): Date {
         return this.creation;
     }
 
-    public setCreation(creation: string): void {
+    public setCreation(creation: Date): void {
         this.creation = creation;
     }
 
-    public getModification(): string {
+    public getModification(): Date {
         return this.modification;
     }
 
-    public setModification(modification: string): void {
+    public setModification(modification: Date): void {
         this.modification = modification;
     }
 

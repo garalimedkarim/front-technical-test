@@ -23,11 +23,26 @@
                                     <th scope="col">Last modification</th>
                                     <th scope="col">Actions</th>
                               </tr>
+                              <tr>
+                                    <td colspan="4">
+                                          <button [disabled]="navigationPipe.length == 0" type="button" class="btn btn-secondary" (click)="onGoBack()">
+                                                <i class="fa fa-arrow-left" aria-hidden="true"></i> Previous
+                                          </button>
+                                    </td>
+                              </tr>
                         </thead>
                         <tbody>
                               <tr *ngFor="let item of items">
                                     <th>
-                                          <i class="fa {{item.getIcon()}}" aria-hidden="true"></i> {{ item.getName() }}
+                                          <span style="cursor: pointer;text-decoration: underline;" *ngIf="item.isFolder()"
+                                                (click)="onNavigate(item.getId())">
+                                                <i class="fa {{item.getIcon()}}" aria-hidden="true"></i> {{
+                                                item.getName() }}
+                                          </span>
+                                          <span *ngIf="!item.isFolder()">
+                                                <i class="fa {{item.getIcon()}}" aria-hidden="true"></i> {{
+                                                item.getName() }}
+                                          </span>
                                     </th>
                                     <td>{{ item.getCreation() | date:'short' }}</td>
                                     <td>{{ item.getModification() | date:'short' }}</td>
@@ -37,9 +52,6 @@
                                           </button>
                                     </td>
                                     <td class="text-center" *ngIf="!item.isFolder()">
-                                          <!-- <button type="button" class="btn btn-success" (click)="download(item.links.download.href)">
-                                                <i class="fa fa-download"></i>
-                                          </button> -->
                                           <a class="btn btn-success" href={{item.links.download.href}}><i class="fa fa-download"></i></a>
                                           <button type="button" class="btn btn-danger" (click)="onDeleteItem(item.getId())">
                                                 <i class="fa fa-trash"></i>
@@ -53,6 +65,14 @@
                                           <input type="file" name="profile" (change)="onFileSelect($event)" />
                                           <button class="btn btn-lg btn-primary" (click)="onUploadFile()">
                                                 Upload file
+                                          </button>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td colspan="4" class="text-right">
+                                          <input type="text" name="folder" #folder />
+                                          <button class="btn btn-lg btn-primary" (click)="onNewDirectory(folder.value)">
+                                                New Directory
                                           </button>
                                     </td>
                               </tr>

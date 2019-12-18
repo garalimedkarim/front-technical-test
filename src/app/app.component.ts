@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ItemService } from './services/item.service';
 import { Item } from './models/item';
+// import {FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
 	selector: 'oo-app',
@@ -11,21 +12,59 @@ import { Item } from './models/item';
 export class AppComponent implements OnInit {
 	menuItems: MenuItem[];
 	items: Item[];
+	selectedFile:any = null;
+	// uploadForm: FormGroup;  
+
 	constructor(
-		private itemService: ItemService
-	){
+		private itemService: ItemService,
+		// private formBuilder: FormBuilder
+	) {
 
 	}
 
 	ngOnInit() {
 		// this.updateItems();
 
-		this.itemService.getItems()
-		.subscribe((items: Item[])=>{
-			console.log("items OK",items);
-			this.items = items;
-		});
+		// this.uploadForm = this.formBuilder.group({
+		// 	profile: ['']
+		// });
 
+		this.itemService.getItems()
+			.subscribe((items: Item[]) => {
+				console.log("items OK", items);
+				this.items = items;
+			});
+
+	}
+
+	onFileSelect(event:Event){
+		console.log("upload FILE***", event.target.files[0]);
+		this.selectedFile = event.target.files[0];
+		
+		// this.itemService.uploadFile(event.target.files[0])
+		// .subscribe(res=>{
+		// 	console.log('RESSSSS',res);
+		// });
+
+		// if (event.target.files.length > 0) {
+		// 	const file = event.target.files[0];
+		// 	this.uploadForm.get('profile').setValue(file);
+		//   }		
+	}
+
+	onUploadFile(){
+		this.itemService.uploadFile(this.selectedFile)
+		.subscribe(res=>{
+			console.log('Uploaded 1212 12121 2121 21',res);
+		});
+	}
+
+	onDeleteItem(fileId:string){
+		this.itemService.deleteItem(fileId)
+		.subscribe(
+			() => console.log("Item deleted"),
+			(error:any) => console.log("Item Delete ERROR! "+ error)	
+		)
 	}
 
 	// download(url:string){

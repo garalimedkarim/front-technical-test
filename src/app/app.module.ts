@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+// import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -13,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 		PanelMenuModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
+		// FormsModule,
+		// ReactiveFormsModule
 	],
 	declarations: [
 		AppComponent,

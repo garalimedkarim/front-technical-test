@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEventType, HttpEvent, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './config.service';
-import { map, tap, last, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Item } from '../models/item';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -57,12 +56,17 @@ export class ItemService {
     });
   }
 
-  uploadFile(file: any) {
+  uploadFile(parentId:string,file: any) {
+    let urlParameter = "";
+    if(parentId){
+      urlParameter += "?parentId="+parentId
+    }
+
     const fd = new FormData();
     fd.append("name",file,file.name);
     // fd.append('folder',"true");
 
-    return this.http.post(this.apiEndPoint + "/api/items",fd);
+    return this.http.post(this.apiEndPoint + "/api/items"+ urlParameter,fd);
 
     // const httpOptions = {
     //   headers: new HttpHeaders({
